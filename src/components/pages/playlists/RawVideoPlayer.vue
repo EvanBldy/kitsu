@@ -75,7 +75,7 @@ export default {
     this.$options.currentTimeCalls = []
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
     window.removeEventListener('resize', this.resetHeight)
     this.player1.removeEventListener('loadedmetadata', this.emitLoadedEvent)
   },

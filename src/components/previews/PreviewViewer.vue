@@ -79,7 +79,7 @@
         :href="originalDlPath"
         :title="fileTitle"
       >
-        <download-icon class="icon" />
+        <icon name="download" class="icon" />
         <span class="text">
           {{ $t('tasks.download_pdf_file', {extension}) }}
         </span>
@@ -96,10 +96,7 @@ import { formatFrame, formatTime } from '@/lib/video'
 
 import { domMixin } from '@/components/mixins/dom'
 
-import {
-  DownloadIcon
-} from 'vue-feather-icons'
-// import ModelViewer from '@/components/previews/ModelViewer'
+import Icon from '@/components/widgets/Icon'
 import PictureViewer from '@/components/previews/PictureViewer'
 import Spinner from '@/components/widgets/Spinner'
 import VideoViewer from '@/components/previews/VideoViewer'
@@ -111,7 +108,7 @@ export default {
   components: {
     // ModelViewer,
     // pdf,
-    DownloadIcon,
+    Icon,
     PictureViewer,
     Spinner,
     VideoViewer
@@ -167,7 +164,7 @@ export default {
   mounted () {
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
   },
 
   computed: {

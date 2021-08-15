@@ -361,7 +361,7 @@ export default {
     }
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
     this.clearSelectedShots()
   },
 
