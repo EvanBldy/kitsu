@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import playlistsApi from '../api/playlists'
 import { sortByDate } from '../../lib/sorting'
 import { removeModelFromList, updateModelFromList } from '../../lib/models'
@@ -397,9 +396,7 @@ const mutations = {
 
   [REMOVE_BUILD_JOB] (state, job) {
     const playlist = state.playlistMap.get(job.playlist_id)
-    Vue.set(
-      playlist, 'build_jobs', removeModelFromList(playlist.build_jobs, job)
-    )
+    playlist.build_jobs = removeModelFromList(playlist.build_jobs, job)
   },
 
   [CHANGE_PLAYLIST_TYPE] (state, { playlist, taskTypeId }) {
