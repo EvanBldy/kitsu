@@ -766,7 +766,7 @@ export default {
 
   watch: {
     displayedAssets () {
-      this.$options.lineIndex = {}
+      this.lineIndex = {}
     },
 
     validationColumns () {

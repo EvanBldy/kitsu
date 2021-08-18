@@ -842,8 +842,14 @@ export default {
     }
   },
 
+  created () {
+    this.scrubbing = false
+    this.silent = false
+    this.scrubStartX = 0
+    this.scrubStartTime = 0
+  },
+
   mounted () {
-    this.$options.scrubbing = false
     if (this.entities) {
       this.entityList = Object.values(this.entities)
     } else {
@@ -1421,11 +1427,11 @@ export default {
 
     removeEntity (entity) {
       this.$emit('remove-entity', entity)
-      this.$options.silent = true
+      this.silent = true
       const entityIndex = this.entityList.findIndex(s => s.id === entity.id)
       this.entityList.splice(entityIndex, 1)
       setTimeout(() => {
-        this.$options.silent = false
+        this.silent = false
       }, 1000)
     },
 
@@ -1753,7 +1759,7 @@ export default {
           }
         }
       }
-      if (!this.$options.silent) this.scrollToEntity(this.playingEntityIndex)
+      if (!this.silent) this.scrollToEntity(this.playingEntityIndex)
     },
 
     onPreviewChanged (entity, previewFile) {
@@ -2110,7 +2116,7 @@ export default {
         if (!this.notSaved) {
           this.startAnnotationSaving(preview, annotations)
         } else {
-          this.$options.changesToSave = { preview, annotations }
+          this.changesToSave = { preview, annotations }
         }
 
         // Update information locally
@@ -2243,29 +2249,29 @@ export default {
     // Scrubbing
 
     onCanvasMouseMoved (event) {
-      if (this.isCurrentPreviewMovie && this.$options.scrubbing) {
+      if (this.isCurrentPreviewMovie && this.scrubbing) {
         const x = event.e.clientX
-        if (x - this.$options.scrubStartX < 0) {
+        if (x - this.scrubStartX < 0) {
           this.goPreviousFrame()
         } else {
           this.goNextFrame()
         }
-        this.$options.scrubStartX = x
+        this.scrubStartX = x
       }
     },
 
     onCanvasClicked (event) {
       if (event.button > 1 && this.isCurrentPreviewMovie) {
-        this.$options.scrubbing = true
-        this.$options.scrubStartX = event.e.clientX
-        this.$options.scrubStartTime = Number(this.currentTimeRaw)
+        this.scrubbing = true
+        this.scrubStartX = event.e.clientX
+        this.scrubStartTime = Number(this.currentTimeRaw)
       }
       return false
     },
 
     onCanvasReleased (event) {
-      if (this.isCurrentPreviewMovie && this.$options.scrubbing) {
-        this.$options.scrubbing = false
+      if (this.isCurrentPreviewMovie && this.scrubbing) {
+        this.scrubbing = false
       }
       return false
     }

@@ -835,7 +835,7 @@ export default {
 
   watch: {
     displayedShots () {
-      this.$options.lineIndex = {}
+      this.lineIndex = {}
     },
 
     validationColumns () {
