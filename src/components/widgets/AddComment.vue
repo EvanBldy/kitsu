@@ -24,7 +24,11 @@
         name-key="full_name"
         :limit="2"
       >
-        <template slot="item" slot-scope="team">
+        <template
+          slot="item"
+          slot-scope="team"
+          v-if="team && team.item"
+        >
           <div class="flexrow">
             <people-avatar
               class="flexrow-item"
